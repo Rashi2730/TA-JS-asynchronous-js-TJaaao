@@ -6,5 +6,5 @@
 - If there is any issue loading data reject the promise with an error message
 
 Add-on:
-
+n m
 - Refactor the image search app you created (in previous exercise) to use the function `fetch` you crated above.
