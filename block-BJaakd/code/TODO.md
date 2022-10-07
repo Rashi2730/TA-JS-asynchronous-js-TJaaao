@@ -2,27 +2,35 @@
 
 ```js
 // Your code
-function proms (url) {
-    return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
-        xhr.open(`GET`, url);
-        xhr.onload = () => 
-        setTimeout(() => resolve(JSON.parse(xhr.response)),1000);
-        xhr.send();
-    });
-}
+let prms = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(`Promise Resolved!`);
+  }, 1000);
+});
+
+prms.then((csl) => console.log(csl));
 ```
 
 2. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch`
 
 ```js
 // Your code
+let prms = new Promise((resolve, reject) => {
+  reject(`Promise Rejected!`);
+});
+
+prms.catch((val) => console.log(val));
 ```
 
 3. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch` and also use `.finally` to log message `Promise Settled!`.
 
 ```js
 // Your code
+let prms = new Promise((resolve, reject) => {
+  reject(`Promise Rejected!`);
+});
+
+prms.catch(console.log).finally(() => console.log(`Promise Settled`));
 ```
 
 4. What will be the output of the code below.
@@ -37,12 +45,21 @@ setTimeout(() => console.log('B'), 0); // callback queue
 Promise.resolve().then(() => console.log('C'));
 
 console.log('D');
+
+A D C B
 ```
 
 5. Write a function named `wait` that accepts `time` in ms returns a promise. The promise gets resolved after given time.
 
 ```js
 // Your code
+function wait(time) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`Promise Resolved!`);
+    }, time);
+  });
+}
 ```
 
 6. Do the following:
@@ -56,6 +73,17 @@ console.log('D');
 
 ```js
 // Your code
+let proms = new Promise((resolve,reject) => {
+    resolve(21);
+}).then((x) => {
+    return x + 10
+    }).then((x) => {
+        return x + 100}
+        ).then((x) => {
+    if(x >100){
+        throw new Error(`Error 🚫`);
+    }
+});.catch(console.log);
 ```
 
 7. Do the following:
@@ -68,6 +96,20 @@ console.log('D');
 
 ```js
 // Your code
+
+let proms = new Promise((resolve, reject) => {
+  resolve([`A`]);
+})
+  .then((x) => {
+    return x.concat(`B`);
+  })
+  .then((x) => {
+    return x.reduce((acc, cv, i) => {
+      acc[i] = cv;
+      return acc;
+    }, {});
+  })
+  .then((x) => console.log(x));
 ```
 
 8. Do the following:
@@ -79,6 +121,24 @@ console.log('D');
 
 ```js
 // Your code
+let first = new Promise((resolve, reject) => {
+  resolve(`1`);
+});
+
+first
+  .then((x) => {
+    console.log(x);
+    return `2`;
+  })
+  .then((x) => {
+    console.log(x);
+
+    return `3`;
+  })
+  .then((x) => {
+    console.log(x);
+    return `4`;
+  });
 ```
 
 9. Do the following:
@@ -90,9 +150,29 @@ console.log('D');
 
 ```js
 // Your code
+let first = new Promise((resolve, reject) => {
+  resolve(`1`);
+});
+
+first.then((x) => {
+  console.log(x);
+
+  return `2`;
+});
+first.then((x) => {
+  console.log(x);
+
+  return `3`;
+});
+first.then((x) => {
+  console.log(x);
+  return `4`;
+});
 ```
 
 10. Try to understand the difference between the problem 8 and 9. Write your observation.
+
+Ans - In Chaining process the value of x changes whereas doing it individually on first it remains 1.
 
 11. Do the following
 
@@ -103,4 +183,21 @@ console.log('D');
 
 ```js
 // Your code
+let proms = new Promise((resolve) => {
+  resolve('John');
+})
+  .then((x) => {
+    return new Promise((resolve, reject) => {
+      resolve('Arya');
+    });
+  })
+  .then((x) => {
+    console.log(x);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Bran');
+      }, 2000);
+    });
+  })
+  .then((x) => console.log(x));
 ```
