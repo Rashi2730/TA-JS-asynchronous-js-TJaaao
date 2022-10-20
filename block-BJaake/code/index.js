@@ -45,9 +45,8 @@ fetch(url)
 
 select.addEventListener('change', (e) => {
   let source = e.target.value.trim();
-  let selected;
   if (source) {
-    selected = all.filter((n) => n.newsSite === source);
+    var selected = all.filter((n) => n.newsSite === source);
   } else {
     selected = all;
   }
