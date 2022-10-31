@@ -6,3 +6,4 @@ You have to update the News App we created in the previous exercise. Get the cod
 - Handle the browser being offline
 - Handle if the response is not ok. Throw error and display a friendly message
 - Use `.finally` to remove the loading indicator
+
