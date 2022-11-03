@@ -10,15 +10,6 @@
 - Use `Promise.allSettled` to log the value of each promise from the given list of promises. And also check if `Promise.all` works with `one`, `two` and `three` or not
 
 ```js
-const one = new Promise((resolve, reject) =>
-  setTimeout(() => resolve('Arya'), 1000)
-);
-const two = new Promise((resolve, reject) =>
-  setTimeout(() => reject(new Error('Whoops!')), 2000)
-);
-const three = new Promise((resolve, reject) =>
-  setTimeout(() => resolve('John'), 3000)
-);
 ```
 
 - What will be the output of the following code snippet? How much time will it take for the promise to resolve?
