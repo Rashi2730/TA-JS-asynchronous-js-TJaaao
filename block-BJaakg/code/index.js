@@ -50,21 +50,24 @@
   }
 
   function showCharacter(characterData) {
+    donut(true);
     charVisible(true);
     Promise.all(
       characterData.map((character) =>
         fetch(character).then((res) => res.json())
       )
-    ).then((d) => {
-      d.forEach((char) => {
-        let p = document.createElement('p');
-        p.innerText = `Name : ${char.name}
+    )
+      .then((d) => {
+        d.forEach((char) => {
+          let p = document.createElement('p');
+          p.innerText = `Name : ${char.name}
          Aliases : ${char.aliases}
           Gender : ${char.gender}
            TvSeries : ${char.tvSeries}`;
-        characterRoot.append(p);
-      });
-    });
+          characterRoot.append(p);
+        });
+      })
+      .finally(donut);
   }
 
   function charVisible(isVis = false) {

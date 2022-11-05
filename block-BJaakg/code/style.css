@@ -223,7 +223,7 @@ main {
 .loader {
   border: 10px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 10px solid #a278eb;
+  border-top: 10px solid #b39ade;
   border-right: 10px solid rgb(142, 219, 142);
   border-bottom: 10px solid rgb(236, 123, 123);
   border-left: 10px solid pink;
@@ -319,6 +319,10 @@ p {
   line-height: 1.8;
 }
 
-.close{
-    
+.close-btn {
+  display: block;
+  text-decoration: none;
+  text-align: right;
+  margin-top: -2rem;
+  color: wheat;
 }
