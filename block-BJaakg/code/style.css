@@ -1,0 +1,324 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  background: #d0b6fd;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+
+/* custom style  */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.container {
+  width: 700px;
+  margin: 0 auto;
+}
+
+/* header */
+
+header {
+  background: #a278eb;
+  padding: 1rem 0;
+  color: white;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+main {
+  background: white;
+  position: relative;
+}
+/* .root {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+} */
+
+/* Dispplay Classes */
+
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+
+/* DonutSpinner */
+
+.loader-container {
+  position: absolute;
+  top: 5rem;
+  z-index: 33;
+  text-align: center;
+  width: 100%;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #a278eb;
+  border-right: 10px solid rgb(142, 219, 142);
+  border-bottom: 10px solid rgb(236, 123, 123);
+  border-left: 10px solid pink;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 0.9s linear infinite;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Display  UI */
+
+main {
+  background: #d0b6fd;
+  position: relative;
+}
+.root {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 1rem;
+}
+article {
+  padding: 2rem 0;
+  border: 2px rgb(21, 14, 14) dashed;
+  text-align: center;
+  background: white;
+  margin: 2rem 0;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(49, 47, 47);
+  margin: 2.5rem 0 1rem 0;
+}
+h6 {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.4rem;
+}
+.btn {
+  background: black;
+  color: white;
+  border-radius: 8px;
+  padding: 0.3rem 1rem;
+  display: inline-block;
+  cursor: pointer;
+}
+.character-sec {
+  background: #a278eb;
+  padding: 1rem;
+  position: absolute;
+  min-height: 150vh;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.character-root {
+  margin: 1rem 0;
+}
+.character-sec h2 {
+  margin-top: 1rem;
+  color: white;
+}
+p {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  border: 2px solid wheat;
+  padding: 0.6rem;
+  line-height: 1.8;
+}
+
+.close{
+    
+}
