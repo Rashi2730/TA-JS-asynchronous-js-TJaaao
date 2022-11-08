@@ -1,116 +1,155 @@
-let box = document.querySelector('.container');
-let root = document.querySelector('.todo-list');
-let todoInput = document.querySelector('input[type=text]');
+// ## Callback to Promise
 
-let url = 'https://basic-todo-api.vercel.app/api/todo';
+// Below you will final a collection of functions and example using callback pattern. Convert the function using callback pattern to use promise. Also convert the example.
 
-function getData() {
-  fetch(url)
-    .then((res) => res.json())
-    .then((res) => {
-      createUI(res.todos);
-    });
-}
+// 1.
 
-function createUI(todos) {
-  root.innerHTML = '';
-  todos.forEach((todo) => {
-    let li = document.createElement('li');
-    li.classList.add('.todo-item', 'flex');
-    let checkbox = document.createElement('input');
-    checkbox.classList.add('checkbox');
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.checked = todo.isCompleted;
-    checkbox.setAttribute('data-id', todo._id);
-    checkbox.addEventListener('click', () =>
-      toggle(todo._id, todo.isCompleted)
+// ```js
+// function timeout(cb,ms) {
+//   setTimeout(cb, ms);
+// }
+
+// timeout(() => console.log('Hey'), 1000);
+
+// // Using Promise
+// ```
+const timeout = (cb, ms) => {
+  return new Promise((res, rej) => {
+    res(setTimeout(cb, ms));
+  });
+};
+timeout(() => console.log('Hello WOrld!'), 2000);
+
+// 2.
+
+// ```js
+const logMsg = (msg) => {
+  return new Promise((res, rej) => {
+    res(
+      setTimeout(() => {
+        console.log(msg);
+      }, 2000)
     );
-    let p = document.createElement('p');
-    p.innerText = todo.title;
-    p.addEventListener('dblclick', (event) => putTodo(event, todo._id));
-    let span = document.createElement('span');
-    span.innerText = '🗑️';
-    span.setAttribute('data-id', todo._id);
-    span.addEventListener('click', () => deleteTodo(todo._id));
-    li.append(checkbox, p, span);
-    root.append(li);
   });
+};
+
+logMsg(`Hello World!`);
+logMsg(`Hey JS!`);
+
+// // Using Promise
+// ```
+
+// 3.
+
+// ```js
+
+const getData = (url, onSuccess, onError) => {
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open(url);
+  //   xhr.onload = () => onSuccess(xhr.response);
+  //   xhr.onerror = () => onError(xhr.response);
+  //   xhr.send();
+  return fetch(url).then(onSuccess).catch(onError);
+};
+
+getData(
+  'https://api.github.com/users/getify',
+  (res) => console.log(res),
+  (error) => console.error(error)
+);
+
+// // Using Promise
+// ```
+
+// 4.
+
+// ```js
+function loadScript(src, callback) {
+  let script = document.createElement('script');
+  script.src = src;
+
+  script.onload = () => callback(null, script);
+  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+  document.head.append(script);
 }
 
-function postTodo(title) {
-  let data = {
-    todo: {
-      title: title,
-    },
-  };
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }).then(() => {
-    getData();
-  });
-}
+loadScript(
+  'https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js',
+  (res) => console.log(res)
+);
 
-todoInput.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter') {
-    postTodo(event.target.value);
-    event.target.value = '';
+// // Using Promise
+// ```
+
+// 5.
+
+// ```js
+// function getName(firstName, callback) {
+//   setTimeout(() => {
+//     if (!firstName) return callback(new Error('no first name passed in!'));
+
+//     const fullName = `${firstName} Doe`;
+
+//     return callback(fullName);
+//   }, 2000);
+// }
+
+// getName('John', console.log);
+// getName(null, console.log);
+
+// // Using Promise
+// ```
+const getName = (firstName) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!firstName) reject(new Error('no first name passed in!'));
+
+      const fullName = `${firstName} Doe`;
+
+      resolve(fullName);
+    }, 2000);
+  });
+};
+
+getName('John').then(console.log);
+
+// 6.
+
+// ```js
+// function getCurrentTime(onSuccess, onFail) {
+//   return setTimeout(function () {
+//     if (didSucceed) {
+//       var currentTime = new Date();
+//       onSuccess(currentTime);
+//     } else {
+//       onFail('Unknown error');
+//     }
+//   }, 2000);
+// }
+
+// // Using Promise
+// ```
+const getCurrentTime = (onSuccess, onFail) => {
+  var didSucceed = Math.random() >= 0.5;
+
+  return new Promise((res, rej) => {
+    setTimeout(function () {
+      if (didSucceed) {
+        var currentTime = new Date();
+        res(onSuccess(currentTime));
+      } else {
+        rej(onFail('Unknown Error'));
+      }
+    }, 2000);
+  });
+};
+
+getCurrentTime(
+  function (currentTime) {
+    console.log('The current time is: ' + currentTime);
+  },
+  function (error) {
+    console.log('There was an error fetching the time');
   }
-});
-
-function deleteTodo(id) {
-  fetch(url + `/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then(() => {
-    getData();
-  });
-}
-
-function putTodo(event, id) {
-  let editInput = document.createElement('input');
-  editInput.value = event.target.innerText;
-  p = event.target;
-  p.parentElement.replaceChild(editInput, p);
-  editInput.addEventListener('keyup', (event) => {
-    if (event.key === 'Enter' && event.target.value.trim()) {
-      let data = {
-        todo: {
-          title: event.target.value,
-        },
-      };
-      fetch(url + `/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }).then(() => {
-        getData();
-      });
-    }
-  });
-}
-
-function toggle(id, status) {
-  let data = {
-    todo: {
-      isCompleted: !status,
-    },
-  };
-  fetch(url + `/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }).then(() => {
-    getData();
-  });
-}
-getData();
+);
